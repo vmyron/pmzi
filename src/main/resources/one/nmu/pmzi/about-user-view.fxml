@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<VBox spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="one.nmu.pmzi.controller.AboutUserController">
+    <MenuBar fx:id="menuBar">
+        <Menu text="Дії">
+            <MenuItem text="Зміна пароля"  onAction="#changePassword"/>
+            <SeparatorMenuItem/>
+            <MenuItem text="Вихід" onAction="#exit"/>
+        </Menu>
+        <Menu text="Довідка">
+            <MenuItem text="Про програму" onAction="#showAbout"/>
+        </Menu>
+    </MenuBar>
+
+    <Label text="Мироненко Віктор Олександрович" wrapText="true"/>
+    <Label text="Група: 122м-22-4" wrapText="true"/>
+    <Label text="Варіант: 20" wrapText="true"/>
+    <Label text="Вимоги до пароля: чергування букв, цифр і знову букв" wrapText="true"/>
+
+</VBox>
