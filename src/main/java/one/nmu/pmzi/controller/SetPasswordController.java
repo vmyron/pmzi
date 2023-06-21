@@ -4,13 +4,16 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import one.nmu.pmzi.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Random;
 
 public class SetPasswordController {
+    public TextField cipherKey;
     private int errorCount = 0;
     private String errorText = "";
     private static final int PASSWORD_MAX_LENGTH = 6;
@@ -47,6 +50,12 @@ public class SetPasswordController {
         user.setEncryptedPassword(PasswordEncoder.encode(passwordFirst.getText()));
         user.setPasswordLastUpdate(LocalDate.now());
         user.setUserState(UserState.ACTIVE);
+        UserCipher cipher = new UserCipher();
+        cipher.setKey(VigenereCipher.generateKey(4));
+        cipher.setText(cipherKey.getText());
+        user.setCipher(cipher);
+        System.out.println("Generated key. Please save it for further use");
+        System.out.println(VigenereCipher.encrypt(cipher.getText(), cipher.getKey()));
         ApplicationState.getUserDB().update(user);
         Stage stage = ApplicationState.getStage();
         stage.close();

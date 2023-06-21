@@ -27,6 +27,7 @@ public class Application extends javafx.application.Application {
 
     public static void main(String[] args) throws IOException {
         ApplicationState.getUserDB().init();
+        Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler https://do.nmu.org.ua/user/view.php?id=51427&course=5227");
         launch();
     }
 

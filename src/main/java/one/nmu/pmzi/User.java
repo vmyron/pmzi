@@ -13,6 +13,8 @@ public class User {
 
     private UserState userState;
 
+    private UserCipher cipher;
+
     public User() {
         this.role = UserRole.USER;
         this.userState = UserState.NEW;
@@ -65,6 +67,14 @@ public class User {
 
     public void setUserState(UserState userState) {
         this.userState = userState;
+    }
+
+    public UserCipher getCipher() {
+        return cipher;
+    }
+
+    public void setCipher(UserCipher cipher) {
+        this.cipher = cipher;
     }
 
     @Override

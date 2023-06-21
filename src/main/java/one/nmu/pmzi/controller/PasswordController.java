@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import one.nmu.pmzi.*;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 public class PasswordController {
 
     private static final int MAX_ATTEMPTS = 3;
+    public TextField key;
     private int errorCount = 0;
     @FXML
     public PasswordField password;
@@ -22,7 +24,9 @@ public class PasswordController {
         User user = ApplicationState.getCurrentUser();
         String pass = password.getText();
         String encrypted = PasswordEncoder.encode(pass);
-        if (user.getEncryptedPassword().equals(encrypted)) {
+        String cipher = key.getText();
+        String decrypted = VigenereCipher.decrypt(cipher, user.getCipher().getKey());
+        if (user.getEncryptedPassword().equals(encrypted) && user.getCipher().getText().equalsIgnoreCase(decrypted)) {
             ApplicationState.registrationJournal().logIn();
             Stage stage = ApplicationState.getStage();
             stage.close();
@@ -41,7 +45,7 @@ public class PasswordController {
             if (errorCount == MAX_ATTEMPTS) {
                 Platform.exit();
             }
-            alert.setText("Введено не правильний пароль");
+            alert.setText("Введено не правильний пароль або ключ");
             errorCount++;
         }
     }
