@@ -10,6 +10,10 @@ public class ApplicationState {
 
     private static Stage stage = null;
 
+    private static final RegistrationJournal registrationJournal = new RegistrationJournal();
+
+    private static final OperationJournal operationJournal = new OperationJournal();
+
     public static void setFirstStart(boolean firstStart) {
         ApplicationState.firstStart = firstStart;
     }
@@ -37,5 +41,13 @@ public class ApplicationState {
 
     public static void setStage(Stage stage) {
         ApplicationState.stage = stage;
+    }
+
+    public static RegistrationJournal registrationJournal() {
+        return registrationJournal;
+    }
+
+    public static OperationJournal operationJournal() {
+        return operationJournal;
     }
 }

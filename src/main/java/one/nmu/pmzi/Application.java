@@ -18,6 +18,7 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         ApplicationState.setStage(stage);
         if (ApplicationState.isFirstStart()) {
+            ApplicationState.operationJournal().setPassword();
             setPasswordScreen(stage);
         } else {
             userName(stage);
@@ -104,6 +105,7 @@ public class Application extends javafx.application.Application {
         edit.setOnAction(e -> {
             User user = userTable.getSelectionModel().getSelectedItem();
             if (user != null) {
+                ApplicationState.operationJournal().editUser();
                 stage.close();
                 editUser(stage, user);
             } else {
@@ -244,6 +246,7 @@ public class Application extends javafx.application.Application {
         Menu actions = new Menu("Дії");
         MenuItem users = new MenuItem("Користувачі");
         users.setOnAction(e -> {
+            ApplicationState.operationJournal().listUsers();
             stage.close();
             try {
                 listUsers(stage);
@@ -254,6 +257,7 @@ public class Application extends javafx.application.Application {
         });
         MenuItem password = new MenuItem("Зміна пароля");
         password.setOnAction(e -> {
+            ApplicationState.operationJournal().changePassword();
             stage.close();
             try {
                 updatePasswordScreen(stage);
@@ -264,6 +268,7 @@ public class Application extends javafx.application.Application {
         });
         MenuItem exit = new MenuItem("Вихід");
         exit.setOnAction(e -> {
+            ApplicationState.registrationJournal().logOut();
             Platform.exit();
         });
         actions.getItems().add(users);
@@ -273,6 +278,7 @@ public class Application extends javafx.application.Application {
         Menu help = new Menu("Довідка");
         MenuItem about = new MenuItem("Про програму");
         about.setOnAction(e -> {
+            ApplicationState.operationJournal().about();
             stage.close();
             try {
                 adminAboutScreen(stage);

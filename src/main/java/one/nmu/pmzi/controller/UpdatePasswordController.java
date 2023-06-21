@@ -67,6 +67,7 @@ public class UpdatePasswordController {
         User user = ApplicationState.getCurrentUser();
         String encrypted = PasswordEncoder.encode(oldPass);
         if (!user.getEncryptedPassword().equals(encrypted)) {
+            ApplicationState.operationJournal().wrongPassword();
             errorText = "Існуючий пароль вказано не вірно";
             return false;
         }

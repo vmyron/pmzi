@@ -50,6 +50,7 @@ public class SetPasswordController {
         ApplicationState.getUserDB().update(user);
         Stage stage = ApplicationState.getStage();
         stage.close();
+        ApplicationState.registrationJournal().logIn();
         if (user.getRole() == UserRole.ADMIN) {
             Application.adminMainScreen(stage);
         } else {

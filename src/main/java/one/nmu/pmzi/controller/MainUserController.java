@@ -16,18 +16,21 @@ public class MainUserController {
 
     @FXML
     public void showAbout(ActionEvent actionEvent) throws IOException {
+        ApplicationState.operationJournal().about();
         Stage stage = ApplicationState.getStage();
         stage.close();
         Application.userAboutScreen(stage);
     }
 
     public void changePassword(ActionEvent actionEvent) throws IOException {
+        ApplicationState.operationJournal().changePassword();
         Stage stage = ApplicationState.getStage();
         stage.close();
         Application.updatePasswordScreen(stage);
     }
 
     public void exit(ActionEvent actionEvent) {
+        ApplicationState.registrationJournal().logOut();
         Platform.exit();
     }
 }

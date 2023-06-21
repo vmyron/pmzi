@@ -31,6 +31,7 @@ public class UserNameController {
                 stage.close();
                 try {
                     if (u.getUserState() == UserState.NEW) {
+                        ApplicationState.operationJournal().setPassword();
                         Application.setPasswordScreen(stage);
                     } else {
                         Application.password(stage);

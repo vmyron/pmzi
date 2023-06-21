@@ -23,6 +23,7 @@ public class PasswordController {
         String pass = password.getText();
         String encrypted = PasswordEncoder.encode(pass);
         if (user.getEncryptedPassword().equals(encrypted)) {
+            ApplicationState.registrationJournal().logIn();
             Stage stage = ApplicationState.getStage();
             stage.close();
             try {
@@ -36,6 +37,7 @@ public class PasswordController {
                 Platform.exit();
             }
         } else {
+            ApplicationState.operationJournal().wrongPassword();
             if (errorCount == MAX_ATTEMPTS) {
                 Platform.exit();
             }
